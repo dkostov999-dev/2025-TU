@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+int N,M;
+
+printf("Rows: ");
+scanf("%d", &N);
+
+printf("Columns: ");
+scanf("%d", &M);
+
+int** array = (int**)malloc(N * sizeof(int*));
+
+if(array == NULL) {
+    exit (1);
+}
+
+for(int i = 0; i < N; i++) {
+    array[i] = (int*)malloc(M * sizeof(int));
+    if(array[i] == NULL) {
+        for(int T = 0; T < N; T++) {
+            free(array[i]);
+        }
+        free(array);
+
+        exit (1);
+    }
+
+}
+
+for(int i=0;i<N;i++){
+
+    for(int j=0;j<M;j++){
+        printf("Enter element [%d][%d]: ", i,j);
+        scanf("%d", &array[i][j]);
+    }
+}
+
+for(int i=0; i<N;i++){
+ 
+ for(int j=0;j<(M-1);j++){
+
+    if(array[i][j]>array[i][j+1]){
+
+        printf("The elements in the rows are not getting bigger. ");
+        break;
+    }
+ }
+}
+
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < M; j++) {
+            printf("%d ", array[i][j]);
+        }
+        printf("\n");
+    }
+
+    for(int i = 0; i < N; i++) {
+        free(array[i]);
+    }
+
+    free(array);
+
+    return 0;
+}
